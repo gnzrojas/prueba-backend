@@ -12,4 +12,12 @@ describe("Operaciones CRUD de cafes", () => {
         //verifica que el array tenga al menos 1 objeto
         expect(response.body.length).toBeGreaterThan(0);
     });
+
+    //Test 2: comprobar que se devuelve un código 404 al intentar eliminar un café con id que no existe
+    it('Al intentar eliminar un café con id que no existe se debería obtener un error', async () => {
+        //petición con id que no existe, en este caso 10
+        const response = await request(server).delete('/cafes/10')
+        //verifica que el status code sea de 404
+        expect(response.status).toBeGreaterThanOrEqual(400);
+    });
 });
